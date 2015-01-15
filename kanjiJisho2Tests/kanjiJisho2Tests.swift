@@ -44,7 +44,7 @@ class kanjiJisho2Tests: XCTestCase {
         XCTAssert(obj.matches[obj.matches.count - 1] == " alt sens", "Pass")
         
         var elements = NSMutableDictionary()
-        
+
         
         obj.search = "ai"
         obj.searchedNrStrokes = "13"
