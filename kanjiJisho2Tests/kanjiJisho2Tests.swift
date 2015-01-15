@@ -8,29 +8,58 @@
 
 import UIKit
 import XCTest
+import kanjiJisho2
 
 class kanjiJisho2Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+       
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
         super.tearDown()
     }
     
     func testExample() {
-        // This is an example of a functional test case.
         XCTAssert(true, "Pass")
     }
     
     func testPerformanceExample() {
-        // This is an example of a performance test case.
         self.measureBlock() {
-            // Put the code you want to measure the time of here.
         }
     }
     
+    func testCustomVC()
+    {
+        let obj = CustomVC()
+        obj.buttonMake()
+    }
+    
+    func testTVC()
+    {
+        let obj = TVC()
+        obj.traitementSense("sens, alt sens")
+        XCTAssert(obj.matches[obj.matches.count - 1] == " alt sens", "Pass")
+        
+        var elements = NSMutableDictionary()
+        
+        
+        obj.search = "ai"
+        obj.searchedNrStrokes = "13"
+        
+        elements.setObject("愛", forKey: "semn")
+        elements.setObject("love, affection, favorite, admire, appreciate", forKey: "translation")
+        elements.setObject("-", forKey: "on")
+        elements.setObject("ai", forKey: "kun")
+        elements.setObject("心", forKey: "radical")
+        elements.setObject("13", forKey: "strokes")
+        
+        obj.dataArray.addObject(elements)
+        obj.recherche()
+    
+        XCTAssert(obj.resultats[0].objectForKey("semn") as NSString == "愛", "Pass")
+    }
+
 }

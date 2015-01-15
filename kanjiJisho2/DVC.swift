@@ -8,7 +8,7 @@
   
 import UIKit
 
-class DVC: UIViewController {
+public class DVC: UIViewController {
 
 //view detaillee sur un kanji recherche
     
@@ -19,15 +19,16 @@ class DVC: UIViewController {
     @IBOutlet weak var rad: UILabel!
     @IBOutlet weak var lbl: UILabel!
     
-    var semn : String = ""
-    var strokes : String = ""
-    var on : String = ""
-    var kun : String = ""
-    var translation : String = ""
-    var radical : String = ""
+    public var semn : String = ""
+    public var strokes : String = ""
+    public var on : String = ""
+    public var kun : String = ""
+    public var translation : String = ""
+    public var radical : String = ""
 
     
-    override func viewDidLoad() {
+    
+    override public func viewDidLoad() {
         super.viewDidLoad()
         lbl.text = semn
         rad.text = radical
@@ -38,7 +39,7 @@ class DVC: UIViewController {
         }
 
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     

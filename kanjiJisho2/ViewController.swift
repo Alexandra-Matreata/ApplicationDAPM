@@ -8,44 +8,31 @@
 import Foundation 
 import UIKit
  
-class ViewController: UIViewController, UITextFieldDelegate {
+public class ViewController: UIViewController, UITextFieldDelegate {
 //view pour la recherche directe
+    
+    //variables pour traitement du texte introduit par clavier
+    var scris = ""
+    var descris = ""
+    var dataArray : NSArray = []
+    var i = 0
+    var j = 0
+    var cheie = ""
+    var dict : Dictionary<String, String> = ["":""]
+    var val : String!
     
     
     var tfText = String()
     
     @IBAction func searchButton(sender: AnyObject) {
         
-        if(tf.text != "")
-        {
-            tfText = tf.text
-            j = dataArray.count - 1
-            scrisfinal = tf.text
-            
-            for i in 0...j
-            {
-                
-                aux = dataArray.objectAtIndex(i).objectForKey("semn") as String
-                cheie = dataArray.objectAtIndex(i).objectForKey("citire") as String
-                
-                var match = aux.rangeOfString(myRegex, options: .RegularExpressionSearch)
-                var substaux = aux.substringWithRange(match!)
-                
-                match = cheie.rangeOfString(myRegexcitire, options: .RegularExpressionSearch)
-                var substcheie = cheie.substringWithRange(match!)
-                
-                scrisfinal = scrisfinal.stringByReplacingOccurrencesOfString(substcheie, withString: substaux, options: nil, range: nil)
-                
-            }
-            
-            tf.text = scrisfinal
-        }
+        traitementTexte()
         
     }
-    @IBOutlet weak var tf: UITextField!
+    @IBOutlet weak public var tf: UITextField!
     @IBOutlet weak var eng: UITextField!
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(textField: UITextField) -> Bool {
         tf.resignFirstResponder()
         eng.resignFirstResponder()
         return true
@@ -68,48 +55,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     // function pour le traitement du texte introduit au clavier
-    func traitementTexte(t : NSString)
+    public func traitementTexte()
     {
-        let all = NSRange(location: 0, length: t.length)
-        var matches : Array<String> = Array<String>()
-        regex?.enumerateMatchesInString(t, options: NSMatchingOptions(0), range: all){
-            
-            (result : NSTextCheckingResult!, _, _) in
-            matches.append(t.substringWithRange(result.range))
-            
-        }
-        
-        
-        
-        var l = matches.count - 1
-        for c in 0...l
+        if(tf.text != "")
         {
-            scris = matches[c] + "\n\n"
-            var match = dict[scris]?.rangeOfString(myRegex, options: .RegularExpressionSearch)
-            var subst = dict[scris]?.substringWithRange(match!)
+            tfText = tf.text
+            var j = dataArray.count - 1
+            scrisfinal = tf.text
             
-            descris = descris + subst!
+            for i in 0...j
+            {
+                
+                aux = dataArray.objectAtIndex(i).objectForKey("semn") as String
+                cheie = dataArray.objectAtIndex(i).objectForKey("citire") as String
+                
+                var match = aux.rangeOfString(myRegex, options: .RegularExpressionSearch)
+                var substaux = aux.substringWithRange(match!)
+                
+                match = cheie.rangeOfString(myRegexcitire, options: .RegularExpressionSearch)
+                var substcheie = cheie.substringWithRange(match!)
+                
+               scrisfinal = scrisfinal.stringByReplacingOccurrencesOfString(substcheie, withString: substaux, options: nil, range: nil)
+                
+            }
+            tf.text = scrisfinal
         }
-        
     }
     
     var x = 0
     var c = 0
     
     
-    //variables pour traitement du texte introduit par clavier
-    var scris = ""
-    var descris = ""
-    var dataArray : NSArray = []
-    var i = 0
-    var j = 0
-    var cheie = ""
-    var dict : Dictionary<String, String> = ["":""]
-    var val : String!
+        
     
-    
-    
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         tf.delegate = self
@@ -133,12 +112,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     //transmission du texte recherche au table view controller
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         var tvc:TVC
         tvc = segue.destinationViewController as TVC
         if(tf.text != "")

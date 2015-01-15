@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-class TVC: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+public class TVC: UITableViewController, UITableViewDelegate, UITableViewDataSource {
 // view pour l'affichage des resultats
     
-    var dataArray : NSArray = []
+    public var dataArray : NSMutableArray = []
     
     //variables et fonction pour le traitement du String avec translation
-    var matches : Array<String> = Array<String>()
+    public var matches : Array<String> = Array<String>()
     var regex = NSRegularExpression(pattern:"[A-Za-z() ]+", options: NSRegularExpressionOptions.CaseInsensitive, error: nil)
     
     //fonction pour la separation des translations
-    func traitementSense(t : NSString)
+    public func traitementSense(t : NSString)
     {
         let all = NSRange(location: 0, length: t.length)
         
@@ -26,20 +26,22 @@ class TVC: UITableViewController, UITableViewDelegate, UITableViewDataSource {
             {
             (result : NSTextCheckingResult!, _, _) in
             self.matches.append(t.substringWithRange(result.range))
+            
             }
+        
     }
     
     
-    var search  = ""
-    var searchedRadicals : Array<String> = []
-    var searchedNrStrokes = ""
+    public var search  = ""
+    public var searchedRadicals : Array<String> = []
+    public var searchedNrStrokes = ""
     
     
-    var resultats = NSMutableArray()
+    public var resultats = NSMutableArray()
     var gasitStrokes = false
     var gasitSearch = false
     
-    func recherche()
+    public func recherche()
     {
         gasitStrokes = false
         gasitSearch = false
@@ -198,12 +200,12 @@ class TVC: UITableViewController, UITableViewDelegate, UITableViewDataSource {
             }}
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
     
-    override func viewDidAppear(animated: Bool) {
+    public override func viewDidAppear(animated: Bool) {
         var caleKanji = NSBundle.mainBundle().pathForResource("kanjiXML-2", ofType: "xml")
         var urlKanji:NSURL = NSURL (fileURLWithPath: caleKanji!)!
         
@@ -214,21 +216,21 @@ class TVC: UITableViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.reloadData()
         }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultats.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
         
         
@@ -239,7 +241,7 @@ class TVC: UITableViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
         
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         var dvc:DVC = DVC()
         dvc = segue.destinationViewController as DVC

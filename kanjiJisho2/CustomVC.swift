@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CustomVC: UIViewController, UITextFieldDelegate {
+public class CustomVC: UIViewController, UITextFieldDelegate {
 // view pour la recherche customisee
    
     @IBOutlet weak var radicalLbl: UILabel!
@@ -18,7 +18,7 @@ class CustomVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var scr: UIScrollView!
       
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self
         strokesTF.delegate = self
@@ -53,7 +53,7 @@ class CustomVC: UIViewController, UITextFieldDelegate {
     
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(textField: UITextField) -> Bool {
         search.resignFirstResponder()
         strokesTF.resignFirstResponder()
         return true
@@ -99,7 +99,7 @@ class CustomVC: UIViewController, UITextFieldDelegate {
         
     }
     
-    func buttonMake()
+    public func buttonMake()
     {
         var edeja = false
         var caleKanji = NSBundle.mainBundle().pathForResource("kanjiXML-2", ofType: "xml")
@@ -151,11 +151,11 @@ class CustomVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         var tvc:TVC
         tvc = segue.destinationViewController as TVC
         tvc.search = search.text

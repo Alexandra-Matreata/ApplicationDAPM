@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class xmlParser: NSObject, NSXMLParserDelegate {
+public class xmlParser: NSObject, NSXMLParserDelegate {
     
 //parser pour le fichier xml avec hiragana
     
@@ -23,6 +23,7 @@ class xmlParser: NSObject, NSXMLParserDelegate {
         beginParsing(url)
         return self
     }
+    
     
     
     func beginParsing(xmlUrl :NSURL) {
@@ -41,14 +42,14 @@ class xmlParser: NSObject, NSXMLParserDelegate {
     }
     
     
-    func parserDidStartDocument(parser: NSXMLParser!) {
+    public func parserDidStartDocument(parser: NSXMLParser!) {
         
     }
     
-    func parserDidEndDocument(parser: NSXMLParser!) {
+    public func parserDidEndDocument(parser: NSXMLParser!) {
         
     }
-    
+  public   
     func parser(_parser: NSXMLParser!, parseErrorOccurred parseError: NSError!) {
         
     }
@@ -67,7 +68,7 @@ class xmlParser: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    public func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
         
         if (elementName as NSString).isEqualToString("silaba") {
             if semn != "" {
@@ -80,7 +81,7 @@ class xmlParser: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+    public func parser(parser: NSXMLParser!, foundCharacters string: String!) {
         if element.isEqualToString("semn") {
             semn.appendString(string)
         } else if element.isEqualToString("citire") {

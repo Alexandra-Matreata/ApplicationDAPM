@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
  
-class kanjiXMLParser: NSObject, NSXMLParserDelegate {
+public class kanjiXMLParser: NSObject, NSXMLParserDelegate {
     
 //parser pour le fichier xml avec kanji
     
@@ -44,15 +44,14 @@ class kanjiXMLParser: NSObject, NSXMLParserDelegate {
         return posts
     }
     
-    func parserDidStartDocument(parser: NSXMLParser!) {
+    public func parserDidStartDocument(parser: NSXMLParser!) {
         
     }
     
-    func parserDidEndDocument(parser: NSXMLParser!) {
+    public func parserDidEndDocument(parser: NSXMLParser!) {
         
     }
-    
-    func parser(_parser: NSXMLParser!, parseErrorOccurred parseError: NSError!) {
+  public func parser(_parser: NSXMLParser!, parseErrorOccurred parseError: NSError!) {
         
     }
     
@@ -79,7 +78,7 @@ class kanjiXMLParser: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    public func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
         
         if (elementName as NSString).isEqualToString("kanji") {
             if semn != ""
@@ -99,7 +98,7 @@ class kanjiXMLParser: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+    public func parser(parser: NSXMLParser!, foundCharacters string: String!) {
         if element.isEqualToString("semn") {
             semn.appendString(string)
         } else if element.isEqualToString("translation") {
